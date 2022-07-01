@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="navbar.js"></script>
+	<title>Home</title>
+	<style type="text/css">
+
+body {
+	margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #E0E0E0;
+}
+ 
+p {
+  display: inline;
+  font-family: 'Arima', cursive;
+}
+#boxes {
+  background-color: #E0E0E0;
+  border-color:  d1d9e6;
+  width: 70%;
+  margin: 40px 70px 0px 230px;
+  border-radius: 8.8px 8.8px 8.8px 8.8px;
+  display: inline-block;
+  height: 400px;
+  box-shadow: 16px 16px 30px #8f8f8f, -16px -16px 30px #ffffff;
+}
+
+#leftbox {
+  float:left; 
+  width:70%;
+  height:400px;
+}
+
+#rightbox{
+  float:right;
+  width:30%;
+  height:400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bookcover {
+  width:10px;
+}
+
+h1 {
+  position: relative;
+  font-family: 'Arima', cursive;
+  left: 50px;
+  top: 20px;
+}
+
+p {
+  position: relative;
+  left: 50px;
+}
+
+#info {
+  font-size: large;
+  font-weight: bold;
+}
+
+#info_value {
+  font-size: large;
+}
+#description {
+  font-size: large;
+  display: block;
+  width:700px;
+}
+
+button {
+ color: #090909;
+ padding: 0.7em 1.7em;
+ font-size: 18px;
+ border-radius: 0.5em;
+ background: #e8e8e8;
+ border: 1px solid #e8e8e8;
+ transition: all .3s;
+ box-shadow: 6px 6px 12px #c5c5c5,
+             -6px -6px 12px #ffffff;
+  margin-left: 40px;
+}
+
+button:hover {
+ border: 1px solid white;
+ box-shadow: 4px 4px 12px #ffffff,
+             -4px -4px 12px #c5c5c5;
+}
+
+button:active {
+ box-shadow: 4px 4px 12px #c5c5c5,
+             -4px -4px 12px #ffffff;
+}
+
+/* ---------------------------------------- */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+nav {
+  height: 83px;
+  margin-bottom: 30px;
+  background: #5161ce;
+}
+body{
+	font-family: 'Roboto', sans-serif;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+
+i {
+	margin-right: 10px;
+}
+
+#navbar-links{
+  text-decoration: none;
+  color: #f8f8f8;
+}
+
+#navbar-button {
+  display: inline;
+  padding: 30px;
+  font-size: x-large;
+}
+
+#navbar-button:hover {
+  color: #5161ce;
+  background: #E0E0E0;
+}
+
+#navbar-button:hover a{
+  color: #5161ce;
+  background: #E0E0E0;
+}
+
+.active {
+  color: #5161ce;
+  background: #E0E0E0;
+}
+
+.active a{
+  color: #5161ce;
+  background: #E0E0E0;
+}
+#nav-brand {
+  float: left;
+  position: relative;
+  top: 24px;left: 50px;
+  font-family: 'Roboto';
+  text-decoration: none;
+  color: #f9f5f5;
+  font-size: xx-large;
+}
+
+#navbar-ul {
+  float: right;
+  list-style: none;
+  position: relative;
+  right: 100px;
+  top: 27px;
+}
+	</style>
+</head>
+<body>
+	<nav>
+    <a id="nav-brand" href="#">MyBooks</a>
+    </button>
+    <div>
+        <ul id="navbar-ul">
+            <li id="navbar-button" class="active">
+                <a id="navbar-links" href="javascript:void(0);">Home</a>
+            </li>
+            <li id="navbar-button">
+                <a id="navbar-links" href="javascript:void(0);">Login</a>
+            </li>
+            <li id="navbar-button">
+                <a id="navbar-links" href="javascript:void(0);">Register</a>
+            </li>
+            <li id="navbar-button">
+                <a id="navbar-links" href="javascript:void(0);">About</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="boxes" th:each="book, iStat : ${bookPage.content}"
+  th:style="${iStat.odd}? 'font-weight: bold;'"
+  th:alt-title="${iStat.even}? 'even' : 'odd'">
+  <div id ="leftbox">
+    <h1 th:text="${book.title}"></h1><br>
+    <p id="author_paragraph">Authors</p>&nbsp;&nbsp;<p id="info_value">someone</p><br>
+    <br>
+    <p id="info">ISBN:&nbsp;&nbsp;<p id="info_value">someone</p></p><br>
+    <p id="info">Published by:&nbsp;&nbsp;</p><p id="info_value" th:text="${book.publisher.name}"></p><br>
+    <br>
+    <p id="description"> I have 4 panels side by side with the 3rd and 4th panels sometimes not having anything in them. They all live in a containing div with a border around them.</p><br>
+    <button>🛒Add to cart</button>
+    <button>💳Buy now</button>
+    <button>✍️Reviews</button>
+  </div>
+  <div id="rightbox"><img src="https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg" alt="W3Schools.com"></div>
+</div>
+<br>
+<div style="display: inline;justify-content: center;" th:if="${bookPage.totalPages > 0}" class="pagination"
+  th:each="pageNumber : ${pageNumbers}">
+<a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
+  th:text=${pageNumber}
+  th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+</div>
+</body>
+</html>

@@ -31,7 +31,7 @@ public class BookController {
         return "books/list";
     }
 
-    @RequestMapping(value = "/listBooks", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String listBooks(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
@@ -39,6 +39,7 @@ public class BookController {
         Page<Book> bookPage = bookService.findPaginated(PageRequest.of(currentPage-1, pageSize));
         model.addAttribute("bookPage",bookPage);
         model.addAttribute("books", bookService.getAllBooks());
+        System.out.println(bookService.getBookById(87L).getPublisher().getName());
         List<HashMap<String, String>> msg = new ArrayList<>();
         msg.add((HashMap<String, String>) new HashMap<>().put("id", "Book id"));
         msg.add((HashMap<String, String>) new HashMap<>().put("name", "Book Name"));
@@ -50,7 +51,7 @@ public class BookController {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "books/listBooks";
+        return "books/home";
     }
 
 }
