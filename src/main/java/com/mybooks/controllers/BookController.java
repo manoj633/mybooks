@@ -32,9 +32,9 @@ public class BookController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String listBooks(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
+    public String home(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(15);
 
         Page<Book> bookPage = bookService.findPaginated(PageRequest.of(currentPage-1, pageSize));
         model.addAttribute("bookPage",bookPage);
@@ -44,6 +44,7 @@ public class BookController {
         msg.add((HashMap<String, String>) new HashMap<>().put("id", "Book id"));
         msg.add((HashMap<String, String>) new HashMap<>().put("name", "Book Name"));
         model.addAttribute("msg", msg);
+        model.addAttribute("imagesource","https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg");
 
 
         int totalPages = bookPage.getTotalPages();

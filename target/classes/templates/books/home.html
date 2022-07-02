@@ -7,8 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="navbar.js"></script>
 	<title>Home</title>
 	<style type="text/css">
 
@@ -169,6 +167,10 @@ i {
   right: 100px;
   top: 27px;
 }
+
+#book_title {
+    margin-top: 24px;
+}
 	</style>
 </head>
 <body>
@@ -193,11 +195,9 @@ i {
     </div>
 </nav>
 
-<div id="boxes" th:each="book, iStat : ${bookPage.content}"
-  th:style="${iStat.odd}? 'font-weight: bold;'"
-  th:alt-title="${iStat.even}? 'even' : 'odd'">
+<div id="boxes" th:each="book, iStat : ${bookPage.content}">
   <div id ="leftbox">
-    <h1 th:text="${book.title}"></h1><br>
+    <h1 id="book_title" th:text="${book.title}"></h1><br>
     <p id="author_paragraph">Authors</p>&nbsp;&nbsp;<p id="info_value">someone</p><br>
     <br>
     <p id="info">ISBN:&nbsp;&nbsp;<p id="info_value">someone</p></p><br>
@@ -208,12 +208,14 @@ i {
     <button>💳Buy now</button>
     <button>✍️Reviews</button>
   </div>
-  <div id="rightbox"><img src="https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg" alt="W3Schools.com"></div>
+  <div id="rightbox">
+      <img th:src="${imagesource}" alt="W3Schools.com">
+  </div>
 </div>
 <br>
 <div style="display: inline;justify-content: center;" th:if="${bookPage.totalPages > 0}" class="pagination"
   th:each="pageNumber : ${pageNumbers}">
-<a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
+<a th:href="@{/home(size=${bookPage.size}, page=${pageNumber})}"
   th:text=${pageNumber}
   th:class="${pageNumber==bookPage.number + 1} ? active"></a>
 </div>
