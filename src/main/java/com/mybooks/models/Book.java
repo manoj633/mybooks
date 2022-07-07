@@ -22,6 +22,8 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+    private String description;
+
     public Book() {
     }
 
@@ -92,6 +94,14 @@ public class Book {
 
     public void setBookcover(String bookcover) {
         this.bookcover = bookcover;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
