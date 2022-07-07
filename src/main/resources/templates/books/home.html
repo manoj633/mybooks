@@ -6,7 +6,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arima:wght@200&family=Splash&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0" />
 	<title>Home</title>
 	<style type="text/css">
 
@@ -22,19 +22,20 @@ p {
 }
 #boxes {
   background-color: #E0E0E0;
-  border-color:  d1d9e6;
+  border-color:  #d1d9e6;
   width: 70%;
   margin: 40px 70px 0px 230px;
   border-radius: 8.8px 8.8px 8.8px 8.8px;
   display: inline-block;
-  height: 400px;
+  height: auto;
   box-shadow: 16px 16px 30px #8f8f8f, -16px -16px 30px #ffffff;
 }
 
 #leftbox {
   float:left; 
   width:70%;
-  height:400px;
+  height:auto;
+    margin-bottom: 20px;
 }
 
 #rightbox{
@@ -74,6 +75,7 @@ p {
   font-size: large;
   display: block;
   width:700px;
+    font-weight: 200;
 }
 
 button {
@@ -171,6 +173,30 @@ i {
 #book_title {
     margin-top: 24px;
 }
+
+#page_num_div {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-bottom: 40px;
+    padding-top: 15px;
+}
+
+#page_numbers {
+    padding: 5px;
+    font-family: 'Arima';
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.book_cover {
+    display: block;
+    max-width:200px;
+    max-height:270px;
+    width: auto;
+    height: auto;
+}
+
 	</style>
 </head>
 <body>
@@ -198,26 +224,28 @@ i {
 <div id="boxes" th:each="book, iStat : ${bookPage.content}">
   <div id ="leftbox">
     <h1 id="book_title" th:text="${book.title}"></h1><br>
-    <p id="author_paragraph">Authors</p>&nbsp;&nbsp;<p id="info_value">someone</p><br>
+    <p id="info">Authors:</p>&nbsp;&nbsp;<p id="info_value" th:each="author: ${book.authors}" th:text="${author.name}"></p><br>
     <br>
-    <p id="info">ISBN:&nbsp;&nbsp;<p id="info_value">someone</p></p><br>
+    <p id="info">ISBN:&nbsp;&nbsp;<p id="info_value" th:text="${book.isbn}"></p></p><br>
     <p id="info">Published by:&nbsp;&nbsp;</p><p id="info_value" th:text="${book.publisher.name}"></p><br>
     <br>
-    <p id="description"> I have 4 panels side by side with the 3rd and 4th panels sometimes not having anything in them. They all live in a containing div with a border around them.</p><br>
+    <p id="description" th:text="${book.description}"></p><br>
     <button>🛒Add to cart</button>
     <button>💳Buy now</button>
     <button>✍️Reviews</button>
   </div>
   <div id="rightbox">
-      <img th:src="${imagesource}" alt="W3Schools.com">
+      <img class="book_cover" th:src="${book.bookcover}" alt="W3Schools.com">
   </div>
 </div>
 <br>
-<div style="display: inline;justify-content: center;" th:if="${bookPage.totalPages > 0}" class="pagination"
+<div id="page_num_div">
+<div id="page_numbers" th:if="${bookPage.totalPages > 0}" class="pagination"
   th:each="pageNumber : ${pageNumbers}">
 <a th:href="@{/home(size=${bookPage.size}, page=${pageNumber})}"
   th:text=${pageNumber}
   th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+</div>
 </div>
 </body>
 </html>

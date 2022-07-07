@@ -13,6 +13,8 @@ public class Book {
     private String title;
     private String isbn;
 
+    private String bookcover;
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "auhtor_id"))
     private Set<Author> authors = new HashSet<>();
@@ -20,24 +22,29 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+    private String description;
+
     public Book() {
     }
 
-    public Book(String title, String isbn) {
+    public Book(String title, String isbn, String bookcover) {
         this.title = title;
         this.isbn = isbn;
+        this.bookcover = bookcover;
     }
 
-    public Book(String title, String isbn, Set<Author> authors) {
+    public Book(String title, String isbn, String bookcover, Set<Author> authors, Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
+        this.bookcover = bookcover;
         this.authors = authors;
+        this.publisher = publisher;
     }
 
-    public Book(String title, String isbn, Set<Author> authors, Publisher publisher) {
+    public Book(String title, String isbn, String bookcover, Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
-        this.authors = authors;
+        this.bookcover = bookcover;
         this.publisher = publisher;
     }
 
@@ -81,6 +88,22 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public String getBookcover() {
+        return bookcover;
+    }
+
+    public void setBookcover(String bookcover) {
+        this.bookcover = bookcover;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -104,4 +127,6 @@ public class Book {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+
 }

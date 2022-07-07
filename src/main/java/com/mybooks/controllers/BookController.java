@@ -39,13 +39,10 @@ public class BookController {
         Page<Book> bookPage = bookService.findPaginated(PageRequest.of(currentPage-1, pageSize));
         model.addAttribute("bookPage",bookPage);
         model.addAttribute("books", bookService.getAllBooks());
-        System.out.println(bookService.getBookById(87L).getPublisher().getName());
         List<HashMap<String, String>> msg = new ArrayList<>();
         msg.add((HashMap<String, String>) new HashMap<>().put("id", "Book id"));
         msg.add((HashMap<String, String>) new HashMap<>().put("name", "Book Name"));
         model.addAttribute("msg", msg);
-        model.addAttribute("imagesource","https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg");
-
 
         int totalPages = bookPage.getTotalPages();
         if(totalPages>0) {
